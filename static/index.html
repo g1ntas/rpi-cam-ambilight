@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World</title>
+    <!--<link href="/css/idcrop.min.css" rel="stylesheet" type="text/css" />-->
+    <style>
+        #leds { position: relative; width: 640px; height: 480px; background: gray; }
+        #leds > div { position: absolute; background: #000; width:5px; height:5px;}
+    </style>
+</head>
+<body>
+    <div id="display" style="background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAoAAAAHgCAQAAACf2BRvAAAEy0lEQVR42u3UMQEAAAzCsOHf9EzwkUjo0RzAqEgAGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAgYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCBgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIGKAFggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhggYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCBigBIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCBggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYICAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhggYIASAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYICAAUoAGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAgYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCBgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIGKAFggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQL0PFmWAeFh6bSiAAAAAElFTkSuQmCC');">
+    <div id="preview"></div>
+    </div>
+    <img id="motionjpeg" src="/stream" />
+
+    <div id="leds">
+
+    </div>
+
+    <!--<script src="/js/idcrop.min.js"></script>-->
+    <script>
+        // const IdCrop = require("idcrop");
+
+        // const idcrop = new IdCrop({
+        //     displaySelector: "#display",
+        //     previewSelector: "#preview",
+        //     allowUpload: false,
+        //     // croppingArea: {
+        //     //     overlayColor: "rgba(0, 0, 0, 0)"
+        //     // }
+        // });
+
+        // idcrop.points = [{x: 10, y: 10}, {x: 630, y: 10}, {x: 630, y: 470}, {x: 10, y: 470}];
+        // console.log(idcrop);
+        // idcrop.startCropArea('iVBORw0KGgoAAAANSUhEUgAAAoAAAAHgCAQAAACf2BRvAAAEy0lEQVR42u3UMQEAAAzCsOHf9EzwkUjo0RzAqEgAGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAgYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCBgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIGKAFggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhggYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCBigBIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCBggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYICAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhggYIASAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYICAAUoAGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAgYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCBgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIGKAFggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIYIAABghggAAGCGCAAAYIGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQIYIIABAhgggAECGCCAAQL0PFmWAeFh6bSiAAAAAElFTkSuQmCC', idcrop);
+
+        // idcrop.init();
+
+        let interval;
+
+        fetch('/leds')
+            .then(r => r.json())
+            .then(function (json) {
+                json.positions.forEach(function (pos, i) {
+                    minX = pos.Min.X
+                    minY = pos.Min.Y
+                    if (i >= 31 && i < 48) {
+                        minX = pos.Max.X
+                    }
+                    if (i >= 48 && i < 79) {
+                        minY = pos.Max.Y
+                    }
+
+                    let led = document.createElement('div');
+                    let color = json.colors[i]
+                    led.setAttribute('id', 'led-'+i);
+                    led.style.left = minX + 'px';
+                    led.style.top = minY  + 'px';
+                    led.style.backgroundColor = 'rgba('+color.R+','+color.G+','+color.B+','+color.A/255+')';
+                    // led.style.width = pos.Max.X - pos.Min.X + 'px';
+                    // led.style.height = pos.Max.Y - pos.Min.Y + 'px';
+                    document.getElementById('leds').appendChild(led);
+
+                    interval = setInterval(updateColors, 1000 / 60);
+                });
+            });
+
+        function updateColors() {
+            fetch('/leds')
+                .then(r => r.json())
+                .then(function (json) {
+                    json.colors.forEach(function (color, i) {
+                        let led = document.getElementById('led-'+i);
+                        led.style.backgroundColor = 'rgba('+color.R+','+color.G+','+color.B+','+color.A/255+')';
+                    });
+                })
+                .catch(function (error) {
+                    clearInterval(interval);
+                });
+        }
+    </script>
+</body>
+</html>
